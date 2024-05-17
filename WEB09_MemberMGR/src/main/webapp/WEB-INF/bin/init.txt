@@ -1,0 +1,6 @@
+/index.do:com.himedia.controller.indexAction:index
+/registerPage.do:com.himedia.controller.memberAction:registerPage
+/register.do:com.himedia.controller.memberAction:register
+/updatePage.do:com.himedia.controller.memberAction:updatePage
+/update.do:com.himedia.controller.memberAction:update
+/delete.do:com.himedia.controller.memberAction:delete

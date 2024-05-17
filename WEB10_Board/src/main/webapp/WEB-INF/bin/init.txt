@@ -1,0 +1,9 @@
+/loginform.do:com.himedia.controller.MemberAction:loginForm
+/login.do:com.himedia.controller.MemberAction:login
+/joinform.do:com.himedia.controller.MemberAction:joinForm
+/idcheck.do:com.himedia.controller.MemberAction:idCheck
+/join.do:com.himedia.controller.MemberAction:join
+/main.do:com.himedia.controller.MainAction:mainForm
+/board.do:com.himedia.controller.BoardAction:getBoardList
+/registerForm.do:com.himedia.controller.BoardAction:registerForm
+/register.do:com.himedia.controller.BoardAction:register

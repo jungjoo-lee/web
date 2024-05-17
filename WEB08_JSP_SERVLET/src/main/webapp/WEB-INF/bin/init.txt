@@ -1,0 +1,7 @@
+/memberMGR.do:com.himedia.controller.Action:getMemberList
+/insert.do:com.himedia.controller.Action:insert
+/insertPage.do:com.himedia.controller.Action:insertPage
+/ParameterNull.do:com.himedia.controller.Action05:a
+/jstl.do:com.himedia.controller.Action05:jstl
+/foreach.do:com.himedia.controller.Action05:foreach
+/format01.do:com.himedia.controller.Action05:format01

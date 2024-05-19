@@ -9,6 +9,6 @@
 <title>index.jsp</title>
 </head>
 <body>
-ㅎㅇ
+<a href="<c:url value='/product/insertForm.do'/>">상품 등록</a>
 </body>
 </html>

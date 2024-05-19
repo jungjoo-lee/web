@@ -1,1 +1,3 @@
 /index.do:com.himedia.controller.IndexAction:index
+/product/insertForm.do:com.himedia.controller.ProductAction:insertForm
+/product/insertProduct.do:com.himedia.controller.ProductAction:insertProduct

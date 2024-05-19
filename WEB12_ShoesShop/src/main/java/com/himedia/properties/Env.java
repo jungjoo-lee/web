@@ -34,4 +34,16 @@ public class Env {
     public static String getNewList() {
     	return prop.getProperty("newlist");
     }
+    
+    public static String getLastProductID() {
+    	return prop.getProperty("lastProductID");
+    }
+    
+    public static String getInsertProduct() {
+    	return prop.getProperty("insertProduct");
+    }
+    
+    public static String getInsertProductImage() {
+    	return prop.getProperty("insertProductImage");
+    }
 }

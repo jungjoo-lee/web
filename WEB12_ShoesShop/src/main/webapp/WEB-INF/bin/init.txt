@@ -1,3 +1,14 @@
 /index.do:com.himedia.controller.IndexAction:index
+/member/loginForm.do:com.himedia.controller.MemberAction:loginForm
+/member/login.do:com.himedia.controller.MemberAction:login
+/member/joinForm.do:com.himedia.controller.MemberAction:joinForm
+/member/idcheck.do:com.himedia.controller.MemberAction:idCheck
+/member/send_auth.do:com.himedia.controller.MemberAction:send_auth
+/member/join.do:com.himedia.controller.MemberAction:join
+/product/listbycategory.do:com.himedia.controller.ProductAction:listByCategory
+/product/productView.do:com.himedia.controller.ProductAction:productView
 /product/insertForm.do:com.himedia.controller.ProductAction:insertForm
 /product/insertProduct.do:com.himedia.controller.ProductAction:insertProduct
+/productImage/writeImage.do:com.himedia.controller.ProductImageAction:writeImage
+/cart/cartForm.do:com.himedia.controller.CartAction:cartForm
+/cart/addCart.do:com.himedia.controller.CartAction:addCart

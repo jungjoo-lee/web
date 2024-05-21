@@ -86,4 +86,32 @@ public class ProductAction {
 		
 		return jsonResult;
 	}
+	
+	public String listByCategory(HttpServletRequest request, HttpServletResponse response) {
+		ProductDAO dao = new ProductDAO();
+		List<ProductDTO> productList = null;
+		
+		try {
+			productList = dao.listByCategory(request.getParameter("kind").charAt(0));
+			request.setAttribute("productList", productList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "/product/listByCategory.jsp";
+	}
+	
+	public String productView(HttpServletRequest request, HttpServletResponse response) {
+		ProductDTO dto;
+		ProductDAO dao = new ProductDAO();
+		
+		try {
+			dto = dao.getProduct(Integer.parseInt(request.getParameter("pseq")));
+			request.setAttribute("product", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "/product/productView.jsp";
+	}
 }

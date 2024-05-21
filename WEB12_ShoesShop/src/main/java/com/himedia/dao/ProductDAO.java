@@ -23,7 +23,13 @@ public class ProductDAO {
 			pstmt = conn.prepareStatement(Env.getBestList());
 			rs = pstmt.executeQuery();
 			
-			
+			while(rs.next()) {
+				bestList.add(ProductDTO.builder()
+						.pseq(rs.getInt(1))
+						.name(rs.getString(2))
+						.price2(rs.getInt(3))
+						.build());
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -41,7 +47,13 @@ public class ProductDAO {
 			pstmt = conn.prepareStatement(Env.getNewList());
 			rs = pstmt.executeQuery();
 			
-			
+			while(rs.next()) {
+				newList.add(ProductDTO.builder()
+						.pseq(rs.getInt(1))
+						.name(rs.getString(2))
+						.price2(rs.getInt(3))
+						.build());
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -49,6 +61,84 @@ public class ProductDAO {
 		}
 		
 		return newList;
+	}
+	
+	public List<ProductDTO> listByCategory(char kind) {
+		List<ProductDTO> productList = new ArrayList<>();
+		
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(Env.getListByCategory());
+			pstmt.setString(1, String.valueOf(kind));
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				productList.add(ProductDTO.builder()
+						.pseq(rs.getInt(1))
+						.name(rs.getString(2))
+						.price2(rs.getInt(3))
+						.build());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		return productList;
+	}
+	
+	public ProductDTO getProduct(int pseq) {
+		ProductDTO dto = null;
+		
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(Env.getProduct());
+			pstmt.setInt(1, pseq);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				dto = ProductDTO.builder()
+						.pseq(rs.getInt(1))
+						.name(rs.getString(2))
+						.kind(rs.getString(3).charAt(0))
+						.price1(rs.getInt(4))
+						.price2(rs.getInt(5))
+						.price3(rs.getInt(6))
+						.content(rs.getString(7))
+						.bestyn(rs.getString(8).charAt(0))
+						.useyn(rs.getString(9).charAt(0))
+						.indate(rs.getTimestamp(10))
+						.build();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		return dto;
+	}
+	
+	public ProductDTO getProductName(int pseq) {
+		ProductDTO dto = null;
+		
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(Env.getProductName());
+			pstmt.setInt(1, pseq);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				dto = ProductDTO.builder().name(rs.getString(1)).build();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		return dto;
 	}
 	
 	public int lastProductID() {
@@ -71,7 +161,6 @@ public class ProductDAO {
 	
 	public void insertProduct(ProductDTO product) {	
 		try {
-			System.out.println(product.toString());
 			conn = DBConn.getConnection();
 			pstmt = conn.prepareStatement(Env.getInsertProduct());
 			pstmt.setString(1, product.getName());

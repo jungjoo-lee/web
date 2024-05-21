@@ -13,6 +13,8 @@ public class CartDTO {
 	private int cseq;
 	private String userid;
 	private int pseq;
+	private String name;
 	private int quantity;
+	private int price;
 	private Timestamp indate;
 }

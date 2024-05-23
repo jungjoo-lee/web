@@ -62,7 +62,12 @@
 								<td>${vo.address1}</td>
 								<td>${vo.address2}</td>
 								<td>${vo.indate}</td>
-								<td class="text-center">${vo.useyn}</td>
+								<td class="text-center">
+									<c:choose>
+										<c:when test="${vo.useyn eq 1}">Y</c:when>
+										<c:otherwise>N</c:otherwise>
+									</c:choose>
+								</td>
 								<td class="text-center"><input class="form-check-input" type="checkbox" value="${vo.userid}"></td>
 							</tr>
 						</c:forEach>
@@ -107,8 +112,13 @@
 					  			</li>
 					  		</c:otherwise>
 					  	</c:choose>
+					  	<li class="list-group-item d-flex align-items-center"><span class="form-text" style="margin-top: 0; margin-left: 20px">${page.currentPage} / ${page.realEnd}</span></li>
 					  </ul>
 					</nav>
+					
+					<div class="d-flex justify-content-center">
+						<input class="form-control" type="text" name="quickMove" id="quickMove" placeholder="pageNum" style="width: 100px">
+					</div>
 					
 					<!-- 검색 -->
 					<nav class="navbar bg-body-tertiary">

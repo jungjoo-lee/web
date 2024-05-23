@@ -91,4 +91,12 @@ public class Env {
     public static String getTotalMember() {
     	return prop.getProperty("getTotalMember");
     }
+    
+    public static String useynMemberToggle() {
+    	return prop.getProperty("useynMemberToggle");
+    }
+    
+    public static String deleteForce() {
+    	return prop.getProperty("deleteForce");
+    }
 }

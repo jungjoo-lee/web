@@ -48,8 +48,11 @@ updateBtn.addEventListener("click", (e) => {
 		.then(jsonResult => {
 			if (jsonResult.status == true) {
 				alert(jsonResult.message);
+				updateContent();
+				checkAll.checked = false;
 			} else {
 				alert(jsonResult.message);
+				checkAll.checked = false;
 			}
 	});
 });
@@ -59,19 +62,26 @@ let deleteBtn = document.querySelector("#deleteBtn");
 deleteBtn.addEventListener("click", (e) => {
 	e.preventDefault();
 	
+	let param = {
+		"checkList" : checkBoxChecked(),
+	};
+	
 	fetch('/WEB12_ShoesShop/admin/deleteForce.do', {
 		method : 'POST',
 		headers: {
 			'Content-Type': 'application/json;charset=utf-8'
-		}/*,
+		},
 			body: JSON.stringify(param)
-		*/})
+		})
 		.then(response => response.json())
 		.then(jsonResult => {
 			if (jsonResult.status == true) {
 				alert(jsonResult.message);
+				updateContent();
+				checkAll.checked = false;
 			} else {
 				alert(jsonResult.message);
+				checkAll.checked = false;
 			}
 	});
 });
@@ -143,7 +153,13 @@ function updateContent() {
 					content += '<td>' + memberList[i].address1 + '</td>';
 					content += '<td>' + memberList[i].address2 + '</td>';
 					content += '<td>' + memberList[i].indate + '</td>';
-					content += '<td class="text-center">' + memberList[i].useyn + '</td>';
+					content += '<td class="text-center">';
+					if (memberList[i].useyn === 1) {
+						content += 'Y';
+					} else {
+						content += 'N';
+					}
+					content += '</td>';
 					content += '<td class="text-center"><input class="form-check-input" type="checkbox" value="' + memberList[i++].userid + '"></td>';
 					content += '</tr>';
 				});
@@ -153,8 +169,6 @@ function updateContent() {
 				startPage = page.startPage;
 				currentPage = page.currentPage;
 				let pagination = '';
-				
-				console.log(page);
 				
 				if (page.prev) {
 					pagination += '<li class="page-item">';
@@ -191,7 +205,11 @@ function updateContent() {
 					pagination += '<a class="page-link">Next</a>';
 					pagination += '</li>';
 				}
-				
+				pagination += '<li class="list-group-item d-flex align-items-center">';
+				pagination += '<span class="form-text" style="margin-top: 0; margin-left: 20px">';
+				pagination += page.currentPage + '/' + page.realEnd;
+				pagination += '</span>';
+				pagination += '</li>';
 				document.querySelector("#pagination").innerHTML = pagination;
 				
 				addPagingEvent();
@@ -200,3 +218,14 @@ function updateContent() {
 			}
 	});
 }
+
+let quickMove = document.querySelector("#quickMove");
+quickMove.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.keyCode === 13) {
+        if (quickMove.value !== "" && quickMove.value !== null) {
+			currentPage = quickMove.value;
+            updateContent();
+            quickMove.value = '';
+        }
+    }
+});

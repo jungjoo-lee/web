@@ -36,7 +36,7 @@ public class AdminDAO {
 						.address1(rs.getString(7))
 						.address2(rs.getString(8))
 						.indate(rs.getTimestamp(9))
-						.useyn(rs.getString(10).charAt(0))
+						.useyn(rs.getInt(10))
 						.build());
 			}
 		} catch (SQLException e) {
@@ -66,5 +66,37 @@ public class AdminDAO {
 		}
 		
 		return total;
+	}
+	
+	public void useynMemberToggle(List<String> useridList) {
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(Env.useynMemberToggle());
+			
+			for (int i = 0; i < useridList.size(); i++) {
+				pstmt.setString(1, useridList.get(i));
+				pstmt.execute();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+	}
+	
+	public void deleteForce(List<String> useridList) {
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement(Env.deleteForce());
+			
+			for (int i = 0; i < useridList.size(); i++) {
+				pstmt.setString(1, useridList.get(i));
+				pstmt.execute();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
 	}
 }

@@ -3,8 +3,10 @@ package com.himedia.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -69,10 +71,17 @@ public class AdminAction {
 		return jsonResult;
 	}
 	
-	public JSONObject updateUseyn(HttpServletRequest request, HttpServletResponse response) {
+	public JSONObject updateUseyn(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		String jsonStr = in.readLine();
+		JSONObject jsonObj = new JSONObject(jsonStr);
+		
 		JSONObject jsonResult = new JSONObject();
+		AdminDAO dao = new AdminDAO();
+		List<String> useridList = parseList(jsonObj);
 		
 		try {
+			dao.useynMemberToggle(useridList);
 			jsonResult.put("status", true);
 			jsonResult.put("message", "수정되었습니다.");
 		} catch (Exception e) {
@@ -84,10 +93,17 @@ public class AdminAction {
 		return jsonResult;
 	}
 	
-	public JSONObject deleteForce(HttpServletRequest request, HttpServletResponse response) {
+	public JSONObject deleteForce(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		String jsonStr = in.readLine();
+		JSONObject jsonObj = new JSONObject(jsonStr);
+		
 		JSONObject jsonResult = new JSONObject();
+		AdminDAO dao = new AdminDAO();
+		List<String> useridList = parseList(jsonObj);
 		
 		try {
+			dao.deleteForce(useridList);
 			jsonResult.put("status", true);
 			jsonResult.put("message", "삭제되었습니다.");
 		} catch (Exception e) {
@@ -97,5 +113,16 @@ public class AdminAction {
 		}
 
 		return jsonResult;
+	}
+	
+	public List<String> parseList(JSONObject jsonObj) {
+		JSONArray checkList = jsonObj.getJSONArray("checkList");
+		List<String> resultList = new ArrayList<>();
+		
+		for (int i = 0; i < checkList.length(); i++) {
+			resultList.add(checkList.getString(i));
+		}
+		
+		return resultList;
 	}
 }

@@ -19,5 +19,5 @@ public class MemberDTO {
 	private String address1;
 	private String address2;
 	private Timestamp indate;
-	private char useyn;
+	private int useyn;
 }

@@ -28,7 +28,6 @@
 <a href="<c:url value='/product/listbycategory.do?kind=3'/>">Sandal</a>
 <a href="<c:url value='/product/listbycategory.do?kind=4'/>">Sneakers</a>
 <a href="<c:url value='/product/listbycategory.do?kind=5'/>">Sleeper</a>
-<a href="<c:url value='/product/insertForm.do'/>">상품 등록</a><br/>
 
 <div>
 	<label>Best</label>

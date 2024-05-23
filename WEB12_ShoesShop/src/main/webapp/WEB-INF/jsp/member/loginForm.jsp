@@ -24,9 +24,9 @@
 	<form method="post" action="<c:url value='/member/login.do'/>">
 		<h2>LogIn</h2>
 		<label>User ID</label>
-		<input name="userid" id="userid" type="text" placeholder="userid"/><br/>
+		<input name="userid" id="userid" type="text" placeholder="userid" value="admin"/><br/>
 		<label>Password</label>
-		<input name="pwd" id="pwd" type="password" placeholder="password"/><br/>
+		<input name="pwd" id="pwd" type="password" placeholder="password" value="1234"/><br/>
 		<input type="submit" name="loginBtn" id="loginBtn" value="LOGIN"/>
 		<input type="button" value="JOIN"/>
 		<input type="button" value="FIND ID"/>

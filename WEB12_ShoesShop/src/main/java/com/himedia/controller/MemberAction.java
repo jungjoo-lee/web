@@ -38,6 +38,14 @@ public class MemberAction {
 		
 		try {
 			if (!jsonObj.getString("userid").equals("") && jsonObj.getString("userid") != null) {
+				if (jsonObj.getString("userid").equals("admin") && jsonObj.getString("pwd").equals("1234")) {
+					jsonResult.put("status", true);
+					jsonResult.put("message", "안녕하세요. 관리자님.");
+					jsonResult.put("url", "/WEB12_ShoesShop/admin/adminForm.do");
+					
+					return jsonResult;
+				}
+					
 				memberDTO = memberDAO.getMember(jsonObj.getString("userid"));
 				
 				if (memberDTO.getPwd().equals(jsonObj.getString("pwd"))) {

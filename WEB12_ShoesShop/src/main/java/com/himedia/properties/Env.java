@@ -82,4 +82,13 @@ public class Env {
     public static String getCartList() {
     	return prop.getProperty("getCartList");
     }
+    
+    // admin
+    public static String getMemberList() {
+    	return prop.getProperty("getMemberList");
+    }
+    
+    public static String getTotalMember() {
+    	return prop.getProperty("getTotalMember");
+    }
 }

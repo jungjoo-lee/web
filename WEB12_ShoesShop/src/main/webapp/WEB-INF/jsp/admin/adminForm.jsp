@@ -123,18 +123,19 @@
 					<!-- 검색 -->
 					<nav class="navbar bg-body-tertiary">
 					  <div class="container-fluid d-flex justify-content-center">
-					  	<select class="form-select" name="searchType" id="searchType" style="width: 150px">
+					  	<select class="form-select" name="selectKind" id="selectKind" style="width: 150px">
 							<option selected>-</option>
 							<option value="userid">UserID</option>
 							<option value="userName">이름</option>
 							<option value="phone">전화번호</option>
 						</select>
 					    <form class="d-flex" role="search">
-					      <input class="form-control me-2" type="search" placeholder="Search">
+					      <input class="form-control me-2" name="keyword" id="keyword" type="search" placeholder="Search">
 					      <button class="btn btn-outline-success" type="submit">Search</button>
 					    </form>
 					  </div>
 					</nav>
+					<div id="searchResults" class="container-fluid d-flex justify-content-center mt-3"></div>
 					
 					<!-- 버튼 -->
 					<div class="row">

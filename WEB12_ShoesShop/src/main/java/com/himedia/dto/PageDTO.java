@@ -1,4 +1,4 @@
-package com.himedia.dao;
+package com.himedia.dto;
 
 import lombok.Data;
 

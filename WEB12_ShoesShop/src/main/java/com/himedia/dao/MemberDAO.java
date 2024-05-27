@@ -7,8 +7,13 @@ import java.sql.SQLException;
 
 import com.himedia.dto.MemberDTO;
 import com.himedia.properties.Env;
+import com.himedia.util.DBConn;
 
 public class MemberDAO {
+	private MemberDAO() {}
+	private static MemberDAO dao = new MemberDAO();
+	public static MemberDAO getInstance() { return dao; }
+	
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;

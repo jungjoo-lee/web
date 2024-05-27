@@ -99,4 +99,12 @@ public class Env {
     public static String deleteForce() {
     	return prop.getProperty("deleteForce");
     }
+    
+    public static String useridKeyword() {
+    	return prop.getProperty("useridKeyword");
+    }
+    
+    public static String nameKeyword() {
+    	return prop.getProperty("nameKeyword");
+    }
 }

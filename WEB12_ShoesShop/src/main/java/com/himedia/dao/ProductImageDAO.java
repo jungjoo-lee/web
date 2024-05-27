@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import com.himedia.dto.ProductImageDTO;
 import com.himedia.properties.Env;
+import com.himedia.util.DBConn;
 
 public class ProductImageDAO {
 	private Connection conn;

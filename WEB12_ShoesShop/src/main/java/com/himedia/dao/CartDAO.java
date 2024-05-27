@@ -9,8 +9,13 @@ import java.util.List;
 
 import com.himedia.dto.CartDTO;
 import com.himedia.properties.Env;
+import com.himedia.util.DBConn;
 
 public class CartDAO {
+	private CartDAO() {}
+	private static CartDAO dao = new CartDAO();
+	public static CartDAO getInstance() { return dao; }
+	
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;

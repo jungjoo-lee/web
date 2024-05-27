@@ -1,4 +1,4 @@
-package com.himedia.dao;
+package com.himedia.util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,14 +38,6 @@ public class DBConn {
 			if (conn != null) {
 				conn.close();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public static void rollBack(Connection conn) {
-		try {
-			conn.rollback();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -9,8 +9,13 @@ import java.util.List;
 
 import com.himedia.dto.MemberDTO;
 import com.himedia.properties.Env;
+import com.himedia.util.DBConn;
 
 public class AdminDAO {
+	private AdminDAO() {}
+	private static AdminDAO dao = new AdminDAO();
+	public static AdminDAO getInstance() { return dao; }
+	
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
@@ -98,5 +103,32 @@ public class AdminDAO {
 		} finally {
 			DBConn.close(conn, pstmt, rs);
 		}
+	}
+	
+	public List<String> keyword(String kind, String keyword) {
+		List<String> resultList = new ArrayList<>();
+		
+		try {
+			conn = DBConn.getConnection();
+
+			if (kind.equals("userid")) {
+				pstmt = conn.prepareStatement(Env.useridKeyword());
+			} else {
+				pstmt = conn.prepareStatement(Env.nameKeyword());
+			}
+			
+			pstmt.setString(1, keyword);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				resultList.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConn.close(conn, pstmt, rs);
+		}
+		
+		return resultList;
 	}
 }

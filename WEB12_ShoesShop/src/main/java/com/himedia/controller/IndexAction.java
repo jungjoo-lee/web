@@ -17,7 +17,6 @@ public class IndexAction {
 		try {
 			bestList = dao.bestList();
 			newList = dao.newList();
-			
 			request.setAttribute("bestList", bestList);
 			request.setAttribute("newList", newList);
 		} catch (Exception e) {

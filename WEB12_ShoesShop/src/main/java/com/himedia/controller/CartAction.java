@@ -23,7 +23,7 @@ public class CartAction {
 	    if (dto == null) {
 	    	return "/member/loginForm.jsp";
 	    } else {
-	    	CartDAO dao = new CartDAO();
+	    	CartDAO dao = CartDAO.getInstance();
 			List<CartDTO> cartList = null;
 			int totalPrice = 0;
 			
@@ -50,7 +50,7 @@ public class CartAction {
 		JSONObject jsonObj = new JSONObject(jsonStr);
 		
 		JSONObject jsonResult = new JSONObject();
-		CartDAO dao = new CartDAO();
+		CartDAO dao = CartDAO.getInstance();
 		HttpSession session = request.getSession(false);
 	    MemberDTO dto = (MemberDTO) session.getAttribute("loginUser");
 		

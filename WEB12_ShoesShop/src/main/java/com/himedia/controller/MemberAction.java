@@ -15,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.json.JSONObject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.himedia.dao.MemberDAO;
 import com.himedia.dto.MemberDTO;
 
@@ -33,7 +34,7 @@ public class MemberAction {
 		JSONObject jsonObj = new JSONObject(jsonStr);
 		JSONObject jsonResult = new JSONObject();
 		
-		MemberDAO memberDAO = new MemberDAO();
+		MemberDAO memberDAO = MemberDAO.getInstance();
 		MemberDTO memberDTO = null;
 		
 		try {
@@ -82,7 +83,7 @@ public class MemberAction {
 		JSONObject jsonObj = new JSONObject(jsonStr);
 		
 		JSONObject jsonResult = new JSONObject();
-		MemberDAO dao = new MemberDAO();
+		MemberDAO dao = MemberDAO.getInstance();
 		MemberDTO dto = null;
 		
 		try {
@@ -159,22 +160,14 @@ public class MemberAction {
 	public JSONObject join(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(request.getInputStream()));
         String jsonStr = in.readLine();
-        JSONObject jsonObj = new JSONObject(jsonStr);
+        ObjectMapper mapper = new ObjectMapper();
+        MemberDTO dto = mapper.readValue(jsonStr, MemberDTO.class);
         
         JSONObject jsonResult = new JSONObject();
-        MemberDAO dao = new MemberDAO();
+        MemberDAO dao = MemberDAO.getInstance();
         
         try {
-        	dao.join(MemberDTO.builder()
-        			.userid(jsonObj.getString("userid"))
-        			.pwd(jsonObj.getString("pwd"))
-        			.name(jsonObj.getString("userName"))
-        			.phone(jsonObj.getString("phone"))
-        			.email(jsonObj.getString("email"))
-        			.zip_num(jsonObj.getString("zip_code"))
-        			.address1(jsonObj.getString("address1"))
-        			.address2(jsonObj.getString("address2"))
-        			.build());
+        	dao.join(dto);
         	jsonResult.put("status", true);
         	jsonResult.put("message", "회원가입 성공");
         	jsonResult.put("url", "/WEB12_ShoesShop/index.do");

@@ -16,3 +16,4 @@
 /admin/updateContent.do:com.himedia.controller.AdminAction:updateContent
 /admin/updateUseyn.do:com.himedia.controller.AdminAction:updateUseyn
 /admin/deleteForce.do:com.himedia.controller.AdminAction:deleteForce
+/admin/keyword.do:com.himedia.controller.AdminAction:keyword

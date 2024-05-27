@@ -92,6 +92,7 @@ let currentPage = 1;
 let pages = document.querySelectorAll('.page-link');
 let pagination1 = document.querySelector("#pagination");
 let startPage = 1;
+let realEnd;
 
 selectAmount.addEventListener("change", () => {
 	amount = selectAmount.options[selectAmount.selectedIndex].value;
@@ -169,6 +170,7 @@ function updateContent() {
 				startPage = page.startPage;
 				currentPage = page.currentPage;
 				let pagination = '';
+				realEnd = page.realEnd;
 				
 				if (page.prev) {
 					pagination += '<li class="page-item">';
@@ -220,12 +222,72 @@ function updateContent() {
 }
 
 let quickMove = document.querySelector("#quickMove");
-quickMove.addEventListener("keydown", (event) => {
-    if (event.key === "Enter" || event.keyCode === 13) {
+quickMove.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.keyCode === 13) {
         if (quickMove.value !== "" && quickMove.value !== null) {
-			currentPage = quickMove.value;
-            updateContent();
-            quickMove.value = '';
+			if (quickMove.value > realEnd) {
+				alert("마지막페이지 보다 넘게 이동 할 수 없습니다.");
+            } else {
+				currentPage = quickMove.value;
+            	updateContent();
+            	quickMove.value = '';
+			}
         }
     }
 });
+
+let selectKind = document.querySelector("#selectKind");
+let kind = '';
+selectKind.addEventListener("change", () => {
+	kind = selectKind.options[selectKind.selectedIndex].value;
+});
+
+let keyword = document.querySelector("#keyword");
+keyword.addEventListener("keyup", (e) => {
+    if (kind !== null && kind !== '') {
+		if (keyword.value == '') {
+			return;
+		}
+		let param = {
+			"kind" : kind,
+			"keyword" : keyword.value,
+		};
+		
+		fetch('/WEB12_ShoesShop/admin/keyword.do', {
+			method : 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8'
+			},
+				body: JSON.stringify(param)
+			})
+			.then(response => response.json())
+			.then(jsonResult => {
+				if (jsonResult.status == true) {
+					displayResults(jsonResult.resultList);
+				}
+		});
+	} else {
+		return;
+	}
+});
+
+function displayResults(results) {
+    let searchResultsDiv = document.getElementById('searchResults');
+    searchResultsDiv.innerHTML = '';
+
+    if (keyword.length === 0) {
+        searchResultsDiv.innerHTML = '<p>검색 결과가 없습니다.</p>';
+    } else {
+        let list = document.createElement('ul');
+        list.className = 'list-group z-3 position-absolute';
+        
+        results.forEach(result => {
+            let listItem = document.createElement('li');
+            listItem.className = 'list-group-item';
+            listItem.textContent = result;
+            list.appendChild(listItem);
+        });
+        
+        searchResultsDiv.appendChild(list);
+    }
+}

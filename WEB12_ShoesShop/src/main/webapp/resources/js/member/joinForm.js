@@ -96,10 +96,10 @@ function join() {
 		let param = {
 			"userid" : userid.value,
 			"pwd" : pwd.value,
-			"userName" : userName.value,
+			"name" : userName.value,
 			"phone" : phone.value,
 			"email" : email.value,
-			"zip_code" : zip_code.value,
+			"zip_num" : zip_code.value,
 			"address1" : address1.value,
 			"address2" : address2.value,
 		};

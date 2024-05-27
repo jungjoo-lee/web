@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.himedia.dto.ProductDTO;
 import com.himedia.properties.Env;
+import com.himedia.util.DBConn;
 
 public class ProductDAO {
 	private Connection conn;
